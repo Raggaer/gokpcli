@@ -14,6 +14,9 @@ import (
 )
 
 var (
+	allowMainInput       = true
+	quit                 = make(chan struct{})
+	msg                  = make(chan string, 1)
 	waitCommandMessage   = ">> gokpcli "
 	databaseLocation     string
 	passwordFileLocation string
@@ -38,8 +41,7 @@ func main() {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
-	msg := make(chan string, 1)
-	go readUserInput(msg)
+	go readUserInput()
 
 	// Read user input until we get a signal
 loop:
@@ -49,7 +51,9 @@ loop:
 			break loop
 		case s := <-msg:
 			handleUserInput(s)
-			fmt.Print(waitCommandMessage)
+			if !confirmDatabaseSave {
+				fmt.Print(waitCommandMessage)
+			}
 		}
 	}
 }
@@ -83,7 +87,7 @@ func readPasswordFile(path string) (string, error) {
 	return strings.TrimSpace(string(f)), nil
 }
 
-func readUserInput(msg chan string) {
+func readUserInput() {
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		text, _ := reader.ReadString('\n')

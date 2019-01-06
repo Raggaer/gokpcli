@@ -9,6 +9,11 @@ func handleUserInput(input string) {
 	for i, arg := range args {
 		args[i] = strings.TrimSpace(arg)
 	}
+	if confirmDatabaseSave {
+		databaseChangedSaveAlert(args[0])
+		confirmDatabaseSave = false
+		return
+	}
 	switch args[0] {
 	case "xp":
 		if len(args) > 1 {
@@ -23,6 +28,10 @@ func handleUserInput(input string) {
 	case "cd":
 		if len(args) > 1 {
 			cd(args[1])
+		}
+	case "rm":
+		if len(args) > 1 {
+			rm(args[1])
 		}
 	}
 }

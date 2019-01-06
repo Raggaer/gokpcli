@@ -28,6 +28,31 @@ func getEntryByNameOrId(entry string) *gokeepasslib.Entry {
 	return nil
 }
 
+func deleteEntry(entry *gokeepasslib.Entry) bool {
+	g := currentGroup()
+	for k, e := range g.Entries {
+		if e.UUID.Compare(entry.UUID) {
+			g.Entries = append(g.Entries[:k], g.Entries[k+1:]...)
+			return true
+		}
+	}
+	return false
+}
+
+// Command "rm" removes an entry
+func rm(entry string) {
+	e := getEntryByNameOrId(entry)
+	if e == nil {
+		return
+	}
+	if !deleteEntry(e) {
+		return
+	}
+	fmt.Printf("Entry '%s' removed\r\n", e.GetTitle())
+	fmt.Print("Database was changed. Save database? (y/N): ")
+	confirmDatabaseSave = true
+}
+
 // Command "xp" copies an entry password
 func xp(entry string) {
 	e := getEntryByNameOrId(entry)

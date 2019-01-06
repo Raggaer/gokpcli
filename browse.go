@@ -47,7 +47,11 @@ func cd(dst string) {
 			return
 		}
 		groupHistory = groupHistory[:len(groupHistory)-1]
-		waitCommandMessage = ">> gokpcli/" + currentGroup().Name + " "
+		if len(groupHistory) > 0 {
+			waitCommandMessage = ">> gokpcli/" + currentGroup().Name + " "
+		} else {
+			waitCommandMessage = ">> gokpcli "
+		}
 		return
 	}
 
