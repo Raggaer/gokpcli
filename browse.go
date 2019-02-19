@@ -26,7 +26,7 @@ func ls() {
 	if len(currentGroup().Groups) > 0 {
 		fmt.Println("=== Groups ===")
 		for k, g := range currentGroup().Groups {
-			fmt.Printf("%d - %s/\r\n", k, g.Name)
+			fmt.Printf("%d - %s/\r\n", k+1, g.Name)
 		}
 	}
 
@@ -34,7 +34,7 @@ func ls() {
 	if len(currentGroup().Entries) > 0 {
 		fmt.Println("=== Entries ===")
 		for k, e := range currentGroup().Entries {
-			fmt.Printf("%d - %s/\r\n", k, e.GetTitle())
+			fmt.Printf("%d - %s/\r\n", k+1, e.GetTitle())
 		}
 	}
 }
@@ -72,7 +72,7 @@ func cd(dst string) {
 	}
 	for k := range currentGroup().Groups {
 		if k == gid {
-			groupHistory = append(groupHistory, k)
+			groupHistory = append(groupHistory, k-1)
 			waitCommandMessage = ">> gokpcli/" + currentGroup().Name + " "
 			return
 		}

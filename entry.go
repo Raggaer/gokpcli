@@ -19,6 +19,7 @@ func getEntryByNameOrId(entry string) *gokeepasslib.Entry {
 		}
 		return nil
 	}
+	eid--
 	for k := range currentGroup().Entries {
 		if k == eid {
 			e := currentGroup().Entries[eid]
