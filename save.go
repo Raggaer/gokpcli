@@ -10,21 +10,21 @@ import (
 
 var confirmDatabaseSave = false
 
-// Shows a database changed message
-// with a save message
+// Shows a database changed message with a save message
 func databaseChangedSaveAlert(f *form, answer string) {
-	if strings.TrimSpace(answer) != "y" {
+	// Remember to close the form
+	defer func() {
 		activeForm = nil
+	}()
+	if strings.TrimSpace(answer) != "y" {
 		return
 	}
 	if err := saveDatabase(); err != nil {
 		fmt.Println("Unable to save database:")
 		fmt.Println(err.Error())
-		activeForm = nil
 		return
 	}
 	fmt.Println("Database saved")
-	activeForm = nil
 }
 
 func saveDatabase() error {
