@@ -73,7 +73,9 @@ func openDatabaseFile(path string) error {
 	}
 
 	database.Credentials = gokeepasslib.NewPasswordCredentials(pw)
-	_ = gokeepasslib.NewDecoder(file).Decode(database)
+	if err := gokeepasslib.NewDecoder(file).Decode(database); err != nil {
+		return err
+	}
 	database.UnlockProtectedEntries()
 
 	return nil
