@@ -34,6 +34,7 @@ func main() {
 	// Open database file
 	if err := openDatabaseFile(databaseLocation); err != nil {
 		fmt.Println("Unable to open KeePass2 database file")
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -53,7 +54,7 @@ loop:
 			break loop
 		case s := <-msg:
 			handleUserInput(s)
-			if !confirmDatabaseSave {
+			if activeForm == nil {
 				fmt.Print(waitCommandMessage)
 			}
 		}

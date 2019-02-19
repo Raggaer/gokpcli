@@ -12,16 +12,19 @@ var confirmDatabaseSave = false
 
 // Shows a database changed message
 // with a save message
-func databaseChangedSaveAlert(answer string) {
+func databaseChangedSaveAlert(f *form, answer string) {
 	if strings.TrimSpace(answer) != "y" {
+		activeForm = nil
 		return
 	}
 	if err := saveDatabase(); err != nil {
 		fmt.Println("Unable to save database:")
 		fmt.Println(err.Error())
+		activeForm = nil
 		return
 	}
 	fmt.Println("Database saved")
+	activeForm = nil
 }
 
 func saveDatabase() error {

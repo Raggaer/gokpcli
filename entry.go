@@ -51,7 +51,9 @@ func rm(entry string) {
 	}
 	fmt.Printf("Entry '%s' removed\r\n", e.GetTitle())
 	fmt.Print("Database was changed. Save database? (y/N): ")
-	confirmDatabaseSave = true
+	activeForm = &form{
+		Fn: databaseChangedSaveAlert,
+	}
 }
 
 // Command "xp" copies an entry password

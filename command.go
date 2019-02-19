@@ -9,9 +9,9 @@ func handleUserInput(input string) {
 	for i, arg := range args {
 		args[i] = strings.TrimSpace(arg)
 	}
-	if confirmDatabaseSave {
-		databaseChangedSaveAlert(args[0])
-		confirmDatabaseSave = false
+	if activeForm != nil {
+		activeForm.Stage++
+		activeForm.Fn(activeForm, args[0])
 		return
 	}
 	switch args[0] {
@@ -25,6 +25,8 @@ func handleUserInput(input string) {
 		if len(args) > 1 {
 			xu(args[1])
 		}
+	case "ng":
+		ng()
 	case "ls":
 		ls()
 	case "cd":
