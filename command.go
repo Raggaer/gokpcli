@@ -15,6 +15,8 @@ func handleUserInput(input string) {
 		return
 	}
 	switch args[0] {
+	case "exit":
+		close(quit)
 	case "xp":
 		if len(args) > 1 {
 			xp(args[1])

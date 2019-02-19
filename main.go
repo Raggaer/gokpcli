@@ -49,6 +49,8 @@ loop:
 		select {
 		case <-sigs:
 			break loop
+		case <-quit:
+			break loop
 		case s := <-msg:
 			handleUserInput(s)
 			if !confirmDatabaseSave {
