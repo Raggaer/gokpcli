@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/tobischo/gokeepasslib"
+	"github.com/tobischo/gokeepasslib/v2"
 )
 
 var confirmDatabaseSave = false

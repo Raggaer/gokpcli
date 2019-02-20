@@ -10,7 +10,7 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/tobischo/gokeepasslib"
+	"github.com/tobischo/gokeepasslib/v2"
 )
 
 var (
@@ -80,7 +80,6 @@ func openDatabaseFile(path string) error {
 		return err
 	}
 	database.UnlockProtectedEntries()
-
 	return nil
 }
 

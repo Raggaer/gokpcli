@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/tobischo/gokeepasslib"
+	"github.com/tobischo/gokeepasslib/v2"
 )
 
 type newGroupForm struct {
@@ -11,6 +11,7 @@ type newGroupForm struct {
 	Notes string
 }
 
+// Command "ng" starts a new group form
 func ng() {
 	fmt.Print("- Group name: ")
 	activeForm = &form{

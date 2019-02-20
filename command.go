@@ -27,6 +27,8 @@ func handleUserInput(input string) {
 		}
 	case "ng":
 		ng()
+	case "ne":
+		ne()
 	case "ls":
 		ls()
 	case "cd":
