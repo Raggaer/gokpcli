@@ -1,4 +1,5 @@
 gokpcli - Simple console application to navigate and use KeePass2 databases
+
 Copyright (C) 2019  Alvaro Carvajal Castro
 
 This program is free software: you can redistribute it and/or modify
