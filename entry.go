@@ -56,10 +56,12 @@ func show(args []string) {
 	}
 	fmt.Println("Title: " + entry.GetTitle())
 	fmt.Println("Uname: " + entry.GetContent("UserName"))
-	fmt.Println("Password: " + entry.GetPassword())
+	fmt.Println("Password: " + mask(entry.GetPassword(), "*"))
 	fmt.Println("URL: " + entry.GetContent("URL"))
 	fmt.Println("Notes:")
-	fmt.Println(entry.GetContent("Notes"))
+	if len(notes) > 0 {
+		fmt.Println(entry.GetContent("Notes"))
+	}
 }
 
 // Command "rm" removes an entry
@@ -160,4 +162,8 @@ func xu(args []string) {
 	}
 	clipboard.WriteAll(e.GetContent("UserName"))
 	fmt.Printf("Copied entry '%s' username to clipboard\r\n", e.GetTitle())
+}
+
+func mask(data, m string) string {
+	return strings.Repeat(m, len(data))
 }
