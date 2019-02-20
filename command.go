@@ -123,10 +123,20 @@ func exit(args []string) {
 
 // Command "help" shows the list of commands
 func help(args []string) {
+	// Check if we want help about a command
+	if len(args) > 1 {
+		for _, command := range commands {
+			if command.Key == args[1] {
+				fmt.Println(command.Key + " -- " + command.Help)
+			}
+		}
+		return
+	}
 	for _, command := range commands {
 		if command.Help == "" && command.HelpSmall == "" {
 			continue
 		}
 		fmt.Println(command.Key + " -- " + command.HelpSmall)
 	}
+	fmt.Println("\r\nType \"help <command>\" for a more detailed help on a command")
 }

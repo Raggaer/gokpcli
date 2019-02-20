@@ -59,7 +59,7 @@ func show(args []string) {
 	fmt.Println("Password: " + mask(entry.GetPassword(), "*"))
 	fmt.Println("URL: " + entry.GetContent("URL"))
 	fmt.Println("Notes:")
-	if len(notes) > 0 {
+	if len(entry.GetContent("notes")) > 0 {
 		fmt.Println(entry.GetContent("Notes"))
 	}
 }

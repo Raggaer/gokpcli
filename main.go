@@ -24,6 +24,9 @@ var (
 )
 
 func main() {
+	fmt.Println("gokpcli is ready for operation")
+	fmt.Println("Type 'help' for a description of available commands")
+	fmt.Println("Type 'help <command>' for details on individual commands")
 	fmt.Print(waitCommandMessage)
 
 	// Parse application flags
