@@ -12,7 +12,7 @@ type newGroupForm struct {
 }
 
 // Command "ng" starts a new group form
-func ng() {
+func ng(args []string) {
 	fmt.Print("- Group name: ")
 	activeForm = &form{
 		Fn:   createNewGroup,

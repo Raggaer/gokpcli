@@ -49,7 +49,8 @@ func deleteEntry(entry *gokeepasslib.Entry) bool {
 }
 
 // Command "rm" removes an entry
-func rm(entry string) {
+func rm(args []string) {
+	entry := args[0]
 	e := getEntryByNameOrId(entry)
 	if e == nil {
 		return
@@ -65,7 +66,7 @@ func rm(entry string) {
 }
 
 // Command "ne" starts a new entry form
-func ne() {
+func ne(args []string) {
 	fmt.Print("- Entry username: ")
 	activeForm = &form{
 		Fn:   createNewEntry,
@@ -126,7 +127,8 @@ func generateEntryPassword(input string) (string, error) {
 }
 
 // Command "xp" copies an entry password
-func xp(entry string) {
+func xp(args []string) {
+	entry := args[0]
 	e := getEntryByNameOrId(entry)
 	if e == nil {
 		return
@@ -136,7 +138,8 @@ func xp(entry string) {
 }
 
 // Command "xu" copies an entry username
-func xu(entry string) {
+func xu(args []string) {
+	entry := args[0]
 	e := getEntryByNameOrId(entry)
 	if e == nil {
 		return

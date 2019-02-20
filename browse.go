@@ -9,9 +9,8 @@ var (
 	groupHistory []int
 )
 
-// Command "ls" shows all groups and entries
-// of the current group
-func ls() {
+// Command "ls" shows all groups and entries of the current group
+func ls(args []string) {
 	// First show groups
 	if len(currentGroup().Groups) > 0 {
 		fmt.Println("=== Groups ===")
@@ -30,7 +29,8 @@ func ls() {
 }
 
 // Command "cd" changes the current group
-func cd(dst string) {
+func cd(args []string) {
+	dst := args[0]
 	// Check if going back
 	if dst == ".." {
 		if len(groupHistory) <= 0 {
