@@ -3,6 +3,10 @@
 Simple KeePass2 console client for linux using a simple command system
 (with some commands beeing inspired on linux commands)
 
+This project is heavily inspired on [http://kpcli.sourceforge.net/](http://kpcli.sourceforge.net/), 
+my attempt is to recreate something similar using something more 'modern' than perl.
+However while **kpcli** takes over the terminal creating a new screen, my approach does not
+
 ## Commands
 
 You can use the `help` command while a database is opened to view the list of commands:
