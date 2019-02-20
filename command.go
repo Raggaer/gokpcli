@@ -20,6 +20,17 @@ var commands = []command{
 		HelpSmall: "Exits the application",
 	},
 	{
+		Key: "show",
+		Fn: func(args []string) {
+			if len(args) >= 1 {
+				show(args)
+			}
+		},
+		Help:      "Shows an entry (show <entry name|number>)",
+		HelpSmall: "Shows an entry (show <entry name|number>)",
+	},
+
+	{
 		Key: "xp",
 		Fn: func(args []string) {
 			if len(args) >= 1 {

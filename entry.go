@@ -48,6 +48,20 @@ func deleteEntry(entry *gokeepasslib.Entry) bool {
 	return false
 }
 
+// Command "show" shows information about an entry
+func show(args []string) {
+	entry := getEntryByNameOrId(args[0])
+	if entry == nil {
+		return
+	}
+	fmt.Println("Title: " + entry.GetTitle())
+	fmt.Println("Uname: " + entry.GetContent("UserName"))
+	fmt.Println("Password: " + entry.GetPassword())
+	fmt.Println("URL: " + entry.GetContent("URL"))
+	fmt.Println("Notes:")
+	fmt.Println(entry.GetContent("Notes"))
+}
+
 // Command "rm" removes an entry
 func rm(args []string) {
 	entry := args[0]
