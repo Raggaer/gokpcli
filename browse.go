@@ -3,21 +3,11 @@ package main
 import (
 	"fmt"
 	"strconv"
-
-	"github.com/tobischo/gokeepasslib"
 )
 
 var (
 	groupHistory []int
 )
-
-func currentGroup() *gokeepasslib.Group {
-	g := &database.Content.Root.Groups[0]
-	for _, h := range groupHistory {
-		g = &g.Groups[h]
-	}
-	return g
-}
 
 // Command "ls" shows all groups and entries
 // of the current group
@@ -47,11 +37,7 @@ func cd(dst string) {
 			return
 		}
 		groupHistory = groupHistory[:len(groupHistory)-1]
-		if len(groupHistory) > 0 {
-			waitCommandMessage = ">> gokpcli/" + currentGroup().Name + " "
-		} else {
-			waitCommandMessage = ">> gokpcli "
-		}
+		waitCommandMessage = buildApplicationWaitMessage()
 		return
 	}
 
@@ -64,16 +50,16 @@ func cd(dst string) {
 		for k, g := range currentGroup().Groups {
 			if g.Name == dst {
 				groupHistory = append(groupHistory, k)
-				waitCommandMessage = ">> gokpcli/" + currentGroup().Name + " "
+				waitCommandMessage = buildApplicationWaitMessage()
 				return
 			}
 		}
 		return
 	}
 	for k := range currentGroup().Groups {
-		if k == gid {
-			groupHistory = append(groupHistory, k-1)
-			waitCommandMessage = ">> gokpcli/" + currentGroup().Name + " "
+		if k == gid-1 {
+			groupHistory = append(groupHistory, k)
+			waitCommandMessage = buildApplicationWaitMessage()
 			return
 		}
 	}

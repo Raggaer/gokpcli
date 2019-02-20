@@ -99,3 +99,18 @@ func readUserInput() {
 		msg <- text
 	}
 }
+
+func buildApplicationWaitMessage() string {
+	g := database.Content.Root.Groups[0]
+	str := ">> gokpcli"
+	for i, h := range groupHistory {
+		if i == 0 {
+			str += "/"
+		}
+		g = g.Groups[h]
+		str += g.Name + "/"
+	}
+	str += " "
+	return str
+
+}

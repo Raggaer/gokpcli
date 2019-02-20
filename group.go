@@ -1,13 +1,54 @@
 package main
 
+import (
+	"fmt"
+
+	"github.com/tobischo/gokeepasslib"
+)
+
+type newGroupForm struct {
+	Name  string
+	Notes string
+}
+
 func ng() {
+	fmt.Print("- Group name: ")
 	activeForm = &form{
-		Fn: createNewGroup,
+		Fn:   createNewGroup,
+		Data: &newGroupForm{},
 	}
 }
 
 func createNewGroup(f *form, input string) {
-	if f.Stage == 3 {
-		activeForm = nil
+	// Retrieve form data
+	data, ok := f.Data.(*newGroupForm)
+	if !ok {
+		return
 	}
+
+	switch f.Stage {
+	case 1:
+		data.Name = input
+		fmt.Print("- Group notes: ")
+	case 2:
+		data.Notes = input
+
+		// Save new group and close form
+		g := gokeepasslib.NewGroup()
+		g.Name = data.Name
+		g.Notes = data.Notes
+		currentGroup().Groups = append(currentGroup().Groups, g)
+		fmt.Print("Database was changed. Save database? (y/N): ")
+		activeForm = &form{
+			Fn: databaseChangedSaveAlert,
+		}
+	}
+}
+
+func currentGroup() *gokeepasslib.Group {
+	g := &database.Content.Root.Groups[0]
+	for _, h := range groupHistory {
+		g = &g.Groups[h]
+	}
+	return g
 }
