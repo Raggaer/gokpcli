@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"strings"
 )
 
@@ -61,7 +60,6 @@ var commands = []command{
 	{
 		Key: "cd",
 		Fn: func(args []string) {
-			log.Println(args)
 			if len(args) >= 1 {
 				cd(args)
 			}

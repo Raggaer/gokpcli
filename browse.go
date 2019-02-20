@@ -15,7 +15,7 @@ func ls(args []string) {
 	if len(currentGroup().Groups) > 0 {
 		fmt.Println("=== Groups ===")
 		for k, g := range currentGroup().Groups {
-			fmt.Printf("%d - %s/\r\n", k+1, g.Name)
+			fmt.Printf("%d. %s/\r\n", k+1, g.Name)
 		}
 	}
 
@@ -23,7 +23,7 @@ func ls(args []string) {
 	if len(currentGroup().Entries) > 0 {
 		fmt.Println("=== Entries ===")
 		for k, e := range currentGroup().Entries {
-			fmt.Printf("%d - %s/\r\n", k+1, e.GetTitle())
+			fmt.Printf("%d. %s\r\n", k+1, e.GetTitle())
 		}
 	}
 }
