@@ -88,6 +88,16 @@ var commands = []command{
 		Help:      "Removes an entry of the current group (rm <entry path|number>)",
 		HelpSmall: "Removes an entry of the current group (rm <entry path|number>)",
 	},
+	{
+		Key: "search",
+		Fn: func(args []string) {
+			if len(args) >= 1 {
+				search(args)
+			}
+		},
+		Help:      "Performs a fuzzy search on all the current group entries",
+		HelpSmall: "Performs a fuzzy search on all the current group entries",
+	},
 }
 
 func handleUserInput(input string) {

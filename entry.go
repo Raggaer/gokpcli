@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/atotto/clipboard"
+	"github.com/lithammer/fuzzysearch/fuzzy"
 	"github.com/sethvargo/go-password/password"
 	"github.com/tobischo/gokeepasslib/v2"
 )
@@ -46,6 +47,18 @@ func deleteEntry(entry *gokeepasslib.Entry) bool {
 		}
 	}
 	return false
+}
+
+// Command "search" searches for entries of the current group
+func search(args []string) {
+	// We combine args again to allow spaces
+	search := strings.ToLower(strings.Join(args, " "))
+	for i, entry := range currentGroup().Entries {
+		if !fuzzy.Match(search, strings.ToLower(entry.GetTitle())) {
+			continue
+		}
+		fmt.Printf("%d. %s\r\n", i+1, entry.GetTitle())
+	}
 }
 
 // Command "show" shows information about an entry
