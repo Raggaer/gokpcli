@@ -118,6 +118,16 @@ var commands = []command{
 		Help:      "Performs a fuzzy search on all the current group entries, by title (search <query>)",
 		HelpSmall: "Performs a fuzzy search on all the current group entries, by title (search <query>)",
 	},
+	{
+		Key: "rmdir",
+		Fn: func(args []string) {
+			if len(args) >= 1 {
+				rmdir(args)
+			}
+		},
+		Help:      "Deletes a group (rmdir <group_name|number>)",
+		HelpSmall: "Deletes a group (rmdir <group_name|number>)",
+	},
 }
 
 func handleUserInput(input string) {

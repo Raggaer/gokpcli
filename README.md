@@ -19,11 +19,17 @@ You can use the `help` command while a database is opened to view the list of co
 - `exit` Closes the application
 - `save` Saves the database
 - `mkdir` Shows and processes a form to create a new group
+- `rmdir` Removes a group (sends the group to the recycle bin)
 - `new` Shows and processes a form to create a new entry
-- `rm` Removes an entry from the current working group
+- `rm` Removes an entry from the current working group (sends the entry to the recycle bin)
 - `show` Shows an entry from the current working group
 - `search` Searches entries (by title) from the current working group
 - `save` Saves the database to disk
+
+## Deleting groups and entries
+
+When an entry or a group is deleted we move it to the `Recycle Bin` group (this will be created if its missing).
+You can delete delete the entry forever or just leave it there as some sort of backup folder
 
 ## Clipboard
 

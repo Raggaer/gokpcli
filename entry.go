@@ -193,7 +193,7 @@ func xp(args []string) {
 }
 
 // Command "xw" copies an entry URL
-func xp(args []string) {
+func xw(args []string) {
 	entry := args[0]
 	e := getEntryByNameOrId(entry)
 	if e == nil {
