@@ -24,6 +24,11 @@ You can use the `help` command while a database is opened to view the list of co
 - `search` Searches entries from the current working group
 - `save` Saves the database to disk
 
+## Clipboard
+
+Commands like `xu` and `xp` copy the content to the system clipboard, making use of [https://github.com/atotto/clipboard](https://github.com/atotto/clipboard).
+You will need `xclip` or `xsel` installed
+
 ## License
 
 **gokpcli** is licensed under the **GNU GPLv3**, basically you can do almost anything you want
