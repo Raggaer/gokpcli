@@ -4,6 +4,8 @@ github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da h1:KjTM2ks9d14ZYCvmH
 github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da/go.mod h1:eHEWzANqSiWQsof+nXEI9bUVUyV6F53Fp89EuCh2EAA=
 github.com/atotto/clipboard v0.1.1 h1:WSoEbAS70E5gw8FbiqFlp69MGsB6dUb4l+0AGGLiVGw=
 github.com/atotto/clipboard v0.1.1/go.mod h1:ZY9tmq7sm5xIbd9bOK4onWV4S6X0u6GY7Vn0Yu86PYI=
+github.com/lithammer/fuzzysearch v1.0.2 h1:AjCE2iwc5y+8K+h2nXVc0Pmrpjvu+JVqMgiZ0oakXDM=
+github.com/lithammer/fuzzysearch v1.0.2/go.mod h1:bvAJyokfCQ7Vknrd4Kgc+izmMrPj5CiBAu2t6rK1Kak=
 github.com/sethvargo/go-password v0.1.2 h1:fhBF4thiPVKEZ7R6+CX46GWJiPyCyXshbeqZ7lqEeYo=
 github.com/sethvargo/go-password v0.1.2/go.mod h1:qKHfdSjT26DpHQWHWWR5+X4BI45jT31dg6j4RI2TEb0=
 github.com/tobischo/gokeepasslib/v2 v2.0.1 h1:tpamemf60drt6i5OFcSXb0TQezhSULwTBbGdg7WmJXI=
