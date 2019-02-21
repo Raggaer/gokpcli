@@ -115,8 +115,8 @@ var commands = []command{
 				search(args)
 			}
 		},
-		Help:      "Performs a fuzzy search on all the current group entries (search <query>)",
-		HelpSmall: "Performs a fuzzy search on all the current group entries (search <query>)",
+		Help:      "Performs a fuzzy search on all the current group entries, by title (search <query>)",
+		HelpSmall: "Performs a fuzzy search on all the current group entries, by title (search <query>)",
 	},
 }
 
