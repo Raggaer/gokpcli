@@ -135,8 +135,8 @@ var commands = []command{
 				edit(args)
 			}
 		},
-		Help:      "Edits an entry (edit <path|number>)",
-		HelpSmall: "Edits an entry (edit <path|number>)",
+		Help:      "Modifies an entry (edit <path|number>)",
+		HelpSmall: "Modifies an entry (edit <path|number>)",
 	},
 }
 
