@@ -21,6 +21,7 @@ You can use the `help` command while a database is opened to view the list of co
 - `mkdir` Shows and processes a form to create a new group
 - `rmdir` Removes a group (sends the group to the recycle bin)
 - `new` Shows and processes a form to create a new entry
+- `edit` Modifies an entry
 - `rm` Removes an entry from the current working group (sends the entry to the recycle bin)
 - `show` Shows an entry from the current working group
 - `search` Searches entries (by title) from the current working group

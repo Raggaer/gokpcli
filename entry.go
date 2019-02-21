@@ -20,6 +20,88 @@ type newEntryForm struct {
 	Username string
 }
 
+type editEntryForm struct {
+	Id       gokeepasslib.UUID
+	Title    string
+	URL      string
+	Password string
+	Username string
+}
+
+// Command "edit" modifies an entry
+func edit(args []string) {
+	entry := getEntryByNameOrId(args[0])
+	if entry == nil {
+		return
+	}
+	fmt.Print("- Entry username (" + entry.GetContent("UserName") + "): ")
+	activeForm = &form{
+		Fn: editEntry,
+		Data: &editEntryForm{
+			Id:       entry.UUID,
+			Title:    entry.GetTitle(),
+			Username: entry.GetContent("UserName"),
+			URL:      entry.GetContent("URL"),
+			Password: entry.GetPassword(),
+		},
+	}
+}
+
+func editEntry(f *form, input string) {
+	data, ok := f.Data.(*editEntryForm)
+	if !ok {
+		return
+	}
+	switch f.Stage {
+	case 1:
+		if input != "" {
+			data.Username = input
+		}
+		fmt.Print("- Entry title (" + data.Title + "): ")
+	case 2:
+		if input != "" {
+			data.Title = input
+		}
+		fmt.Print("- Entry password (" + data.Password + "): ")
+	case 3:
+		if input != "" {
+			data.Password = input
+		}
+		fmt.Print("- Entry URL (" + data.URL + "): ")
+	case 4:
+		if input != "" {
+			data.URL = input
+		}
+		// Update entry based on UUID
+		g := currentGroup()
+		for i, e := range g.Entries {
+			if e.UUID.Compare(data.Id) {
+				fmt.Printf("Entry '%s' modified\r\n", e.GetTitle())
+				values := g.Entries[i].Values
+				for i, v := range values {
+					if v.Key == "Title" {
+						values[i].Value.Content = data.Title
+					}
+					if v.Key == "URL" {
+						values[i].Value.Content = data.URL
+					}
+					if v.Key == "UserName" {
+						values[i].Value.Content = data.Username
+					}
+					if v.Key == "Password" {
+						values[i].Value.Content = data.Password
+					}
+				}
+				fmt.Print("Database was changed. Save database? (y/N): ")
+				activeForm = &form{
+					Fn: databaseChangedSaveAlert,
+				}
+				return
+			}
+		}
+	}
+}
+
 func getEntryByNameOrId(entry string) *gokeepasslib.Entry {
 	eid, err := strconv.Atoi(entry)
 	if err != nil {

@@ -128,6 +128,16 @@ var commands = []command{
 		Help:      "Deletes a group (rmdir <group_name|number>)",
 		HelpSmall: "Deletes a group (rmdir <group_name|number>)",
 	},
+	{
+		Key: "edit",
+		Fn: func(args []string) {
+			if len(args) >= 1 {
+				edit(args)
+			}
+		},
+		Help:      "Edits an entry (edit <path|number>)",
+		HelpSmall: "Edits an entry (edit <path|number>)",
+	},
 }
 
 func handleUserInput(input string) {
