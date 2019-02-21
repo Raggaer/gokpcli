@@ -13,12 +13,13 @@ You can use the `help` command while a database is opened to view the list of co
 
 - `xp` Copies the password of an entry
 - `xu` Copies the username of an entry
+- `xw` Copies the URL (www) of an entry
 - `ls` Lists all the groups and entries of the current group
 - `cd` Changes the current working group
 - `exit` Closes the application
 - `save` Saves the database
-- `ng` Shows and processes a form to create a new group
-- `ne` Shows and processes a form to create a new entry
+- `mkdir` Shows and processes a form to create a new group
+- `new` Shows and processes a form to create a new entry
 - `rm` Removes an entry from the current working group
 - `show` Shows an entry from the current working group
 - `search` Searches entries from the current working group

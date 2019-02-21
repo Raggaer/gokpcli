@@ -11,8 +11,8 @@ type newGroupForm struct {
 	Notes string
 }
 
-// Command "ng" starts a new group form
-func ng(args []string) {
+// Command "mkdir" starts a new group form
+func mkdir(args []string) {
 	fmt.Print("- Group name: ")
 	activeForm = &form{
 		Fn:   createNewGroup,

@@ -120,7 +120,7 @@ func rm(args []string) {
 	}
 }
 
-// Command "ne" starts a new entry form
+// Command "new" starts a new entry form
 func ne(args []string) {
 	fmt.Print("- Entry username: ")
 	activeForm = &form{
@@ -190,6 +190,17 @@ func xp(args []string) {
 	}
 	clipboard.WriteAll(e.GetPassword())
 	fmt.Printf("Copied entry '%s' password to clipboard\r\n", e.GetTitle())
+}
+
+// Command "xw" copies an entry URL
+func xp(args []string) {
+	entry := args[0]
+	e := getEntryByNameOrId(entry)
+	if e == nil {
+		return
+	}
+	clipboard.WriteAll(e.GetContent("URL"))
+	fmt.Printf("Copied entry '%s' URL to clipboard\r\n", e.GetTitle())
 }
 
 // Command "xu" copies an entry username

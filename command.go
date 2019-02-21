@@ -40,7 +40,6 @@ var commands = []command{
 		Help:      "Shows an entry (show <entry name|number>)",
 		HelpSmall: "Shows an entry (show <entry name|number>)",
 	},
-
 	{
 		Key: "xp",
 		Fn: func(args []string) {
@@ -50,6 +49,16 @@ var commands = []command{
 		},
 		Help:      "Copies an entry password (xp <entry name|number>)",
 		HelpSmall: "Copies an entry password (xp <entry name|number>)",
+	},
+	{
+		Key: "xw",
+		Fn: func(args []string) {
+			if len(args) >= 1 {
+				xw(args)
+			}
+		},
+		Help:      "Copies an entry URL (xw <entry name|number>)",
+		HelpSmall: "Copies an entry URL (xw <entry name|number>)",
 	},
 	{
 		Key: "xu",
@@ -62,13 +71,13 @@ var commands = []command{
 		HelpSmall: "Copies an entry username (xu <entry name|number>)",
 	},
 	{
-		Key:       "ng",
-		Fn:        ng,
+		Key:       "mkdir",
+		Fn:        mkdir,
 		Help:      "Creates a new group inside the current group",
 		HelpSmall: "Creates a new group inside the current group",
 	},
 	{
-		Key:       "ne",
+		Key:       "new",
 		Fn:        ne,
 		Help:      "Creates a new entry inside the current group",
 		HelpSmall: "Creates a new entry inside the current group",
