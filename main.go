@@ -23,14 +23,9 @@ var (
 )
 
 func main() {
-	fmt.Println("gokpcli is ready for operation")
-	fmt.Println("Type 'help' for a description of available commands")
-	fmt.Println("Type 'help <command>' for details on individual commands")
-	fmt.Print(waitCommandMessage)
-
 	// Parse application flags
 	flag.StringVar(&databaseLocation, "db", "", "KeePass2 database file location")
-	flag.StringVar(&passwordFileLocation, "pwfile", "", "File that stores your KeePass2 database")
+	flag.StringVar(&passwordFileLocation, "pwfile", "", "File that stores your KeePass2 database password")
 	flag.Parse()
 
 	// Open database file
@@ -39,6 +34,11 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
+
+	fmt.Println("gokpcli is ready for operation")
+	fmt.Println("Type 'help' for a description of available commands")
+	fmt.Println("Type 'help <command>' for details on individual commands")
+	fmt.Print(waitCommandMessage)
 
 	// Register channel to get signal notifications
 	sigs := make(chan os.Signal, 1)
