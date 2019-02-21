@@ -11,6 +11,8 @@ import (
 	"github.com/tobischo/gokeepasslib/v2"
 )
 
+const recycleBinGroup = "Recycle Bin"
+
 type newEntryForm struct {
 	Title    string
 	URL      string
@@ -42,11 +44,35 @@ func deleteEntry(entry *gokeepasslib.Entry) bool {
 	g := currentGroup()
 	for k, e := range g.Entries {
 		if e.UUID.Compare(entry.UUID) {
+			// Delete entry from the current group
 			g.Entries = append(g.Entries[:k], g.Entries[k+1:]...)
+
+			// Add entry to recycle bin
+			if g.Name != recycleBinGroup {
+				moveEntryToRecycleBin(entry)
+			}
 			return true
 		}
 	}
 	return false
+}
+
+func moveEntryToRecycleBin(entry *gokeepasslib.Entry) {
+	// Recycle bin group is at the root, if it does not exist we create it
+	for i, g := range database.Content.Root.Groups[0].Groups {
+		if g.Name == recycleBinGroup {
+			e := gokeepasslib.NewEntry()
+			e.Values = append(entry.Values, gokeepasslib.ValueData{Key: "UserName", Value: gokeepasslib.V{Content: entry.GetContent("UserName")}})
+			e.Values = append(entry.Values, gokeepasslib.ValueData{Key: "Title", Value: gokeepasslib.V{Content: entry.GetTitle()}})
+			e.Values = append(entry.Values, gokeepasslib.ValueData{Key: "URL", Value: gokeepasslib.V{Content: entry.GetContent("URL")}})
+			e.Values = append(entry.Values, gokeepasslib.ValueData{Key: "Password", Value: gokeepasslib.V{Content: entry.GetPassword(), Protected: true}})
+			database.Content.Root.Groups[0].Groups[i].Entries = append(database.Content.Root.Groups[0].Groups[i].Entries, e)
+			return
+		}
+	}
+	bin := gokeepasslib.NewGroup()
+	bin.Name = recycleBinGroup
+	database.Content.Root.Groups[0].Groups = append(database.Content.Root.Groups[0].Groups, bin)
 }
 
 // Command "search" searches for entries of the current group
