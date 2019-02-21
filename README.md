@@ -21,6 +21,8 @@ You can use the `help` command while a database is opened to view the list of co
 - `ne` Shows and processes a form to create a new entry
 - `rm` Removes an entry from the current working group
 - `show` Shows an entry from the current working group
+- `search` Searches entries from the current working group
+- `save` Saves the database to disk
 
 ## License
 
