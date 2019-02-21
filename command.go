@@ -14,6 +14,17 @@ type command struct {
 
 var commands = []command{
 	{
+		Key: "save",
+		Fn: func(args []string) {
+			if err := saveDatabase(); err != nil {
+				fmt.Println("Unable to save database")
+				fmt.Println(err.Error())
+			}
+		},
+		Help:      "Saves the database to disk",
+		HelpSmall: "Saves the database to disk",
+	},
+	{
 		Key:       "exit",
 		Fn:        exit,
 		Help:      "Exits the application",
@@ -95,8 +106,8 @@ var commands = []command{
 				search(args)
 			}
 		},
-		Help:      "Performs a fuzzy search on all the current group entries",
-		HelpSmall: "Performs a fuzzy search on all the current group entries",
+		Help:      "Performs a fuzzy search on all the current group entries (search <query>)",
+		HelpSmall: "Performs a fuzzy search on all the current group entries (search <query>)",
 	},
 }
 
