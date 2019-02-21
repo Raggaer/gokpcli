@@ -14,7 +14,6 @@ import (
 )
 
 var (
-	allowMainInput       = true
 	quit                 = make(chan struct{})
 	msg                  = make(chan string, 1)
 	waitCommandMessage   = ">> gokpcli "
