@@ -20,12 +20,14 @@ var (
 	databaseLocation     string
 	passwordFileLocation string
 	database             *gokeepasslib.Database
+	doNotBackups         = false
 )
 
 func main() {
 	// Parse application flags
 	flag.StringVar(&databaseLocation, "db", "", "KeePass2 database file location")
 	flag.StringVar(&passwordFileLocation, "pwfile", "", "File that stores your KeePass2 database password")
+	flag.BoolVar(&doNotBackups, "nbackup", false, "Do not use the builtin backup method")
 	flag.Parse()
 
 	// Open database file
