@@ -7,6 +7,20 @@ This project is heavily inspired on [http://kpcli.sourceforge.net/](http://kpcli
 my attempt is to recreate something similar using something more 'modern' than perl.
 However while **kpcli** takes over the terminal creating a new screen, my approach does not
 
+## Usage
+
+The following flags are available when using `gokpcli`:
+
+- `nbackup` If set when saving the database no backups will be done
+- `pwfile` File where your database password is stored (instead of passing the plaintext password)
+- `db` Database filepath 
+
+### Example
+
+```
+./gokpcli -db=/mnt/raggaer_g/KeePass/Databases/raggaer_test.kdbx -pwfile=/home/raggaer/.kpcli-master
+```
+
 ## Commands
 
 You can use the `help` command while a database is opened to view the list of commands:
