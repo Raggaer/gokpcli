@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/atotto/clipboard"
 	"github.com/lithammer/fuzzysearch/fuzzy"
 	"github.com/sethvargo/go-password/password"
 	"github.com/tobischo/gokeepasslib/v2"
+	"github.com/tobischo/gokeepasslib/v2/wrappers"
 )
 
 const recycleBinGroup = "Recycle Bin"
@@ -78,6 +80,8 @@ func editEntry(f *form, input string) {
 			if e.UUID.Compare(data.Id) {
 				fmt.Printf("Entry '%s' modified\r\n", e.GetTitle())
 				values := g.Entries[i].Values
+
+				// Update values slice
 				for i, v := range values {
 					if v.Key == "Title" {
 						values[i].Value.Content = data.Title
@@ -91,6 +95,12 @@ func editEntry(f *form, input string) {
 					if v.Key == "Password" {
 						values[i].Value.Content = data.Password
 					}
+				}
+
+				// Update entry modified
+				g.Entries[i].Times.LastModificationTime = &wrappers.TimeWrapper{
+					Formatted: true,
+					Time:      time.Now().In(time.UTC),
 				}
 				fmt.Print("Database was changed. Save database? (y/N): ")
 				activeForm = &form{
@@ -131,6 +141,10 @@ func deleteEntry(entry *gokeepasslib.Entry) bool {
 
 			// Add entry to recycle bin
 			if g.Name != recycleBinGroup {
+				entry.Times.LocationChanged = &wrappers.TimeWrapper{
+					Formatted: true,
+					Time:      time.Now().In(time.UTC),
+				}
 				moveEntryToRecycleBin(entry)
 			}
 			return true
@@ -143,17 +157,13 @@ func moveEntryToRecycleBin(entry *gokeepasslib.Entry) {
 	// Recycle bin group is at the root, if it does not exist we create it
 	for i, g := range database.Content.Root.Groups[0].Groups {
 		if g.Name == recycleBinGroup {
-			e := gokeepasslib.NewEntry()
-			e.Values = append(entry.Values, gokeepasslib.ValueData{Key: "UserName", Value: gokeepasslib.V{Content: entry.GetContent("UserName")}})
-			e.Values = append(entry.Values, gokeepasslib.ValueData{Key: "Title", Value: gokeepasslib.V{Content: entry.GetTitle()}})
-			e.Values = append(entry.Values, gokeepasslib.ValueData{Key: "URL", Value: gokeepasslib.V{Content: entry.GetContent("URL")}})
-			e.Values = append(entry.Values, gokeepasslib.ValueData{Key: "Password", Value: gokeepasslib.V{Content: entry.GetPassword(), Protected: true}})
-			database.Content.Root.Groups[0].Groups[i].Entries = append(database.Content.Root.Groups[0].Groups[i].Entries, e)
+			database.Content.Root.Groups[0].Groups[i].Entries = append(database.Content.Root.Groups[0].Groups[i].Entries, *entry)
 			return
 		}
 	}
 	bin := gokeepasslib.NewGroup()
 	bin.Name = recycleBinGroup
+	bin.Entries = append(bin.Entries, *entry)
 	database.Content.Root.Groups[0].Groups = append(database.Content.Root.Groups[0].Groups, bin)
 }
 
@@ -270,6 +280,12 @@ func xp(args []string) {
 	if e == nil {
 		return
 	}
+	// Update entry access time
+	e.Times.LastAccessTime = &wrappers.TimeWrapper{
+		Formatted: true,
+		Time:      time.Now().In(time.UTC),
+	}
+	e.Times.UsageCount++
 	clipboard.WriteAll(e.GetPassword())
 	fmt.Printf("Copied entry '%s' password to clipboard\r\n", e.GetTitle())
 }
@@ -281,6 +297,12 @@ func xw(args []string) {
 	if e == nil {
 		return
 	}
+	// Update entry access time
+	e.Times.LastAccessTime = &wrappers.TimeWrapper{
+		Formatted: true,
+		Time:      time.Now().In(time.UTC),
+	}
+	e.Times.UsageCount++
 	clipboard.WriteAll(e.GetContent("URL"))
 	fmt.Printf("Copied entry '%s' URL to clipboard\r\n", e.GetTitle())
 }
@@ -292,6 +314,12 @@ func xu(args []string) {
 	if e == nil {
 		return
 	}
+	// Update entry access time
+	e.Times.LastAccessTime = &wrappers.TimeWrapper{
+		Formatted: true,
+		Time:      time.Now().In(time.UTC),
+	}
+	e.Times.UsageCount++
 	clipboard.WriteAll(e.GetContent("UserName"))
 	fmt.Printf("Copied entry '%s' username to clipboard\r\n", e.GetTitle())
 }
