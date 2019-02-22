@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
+	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/tobischo/gokeepasslib/v2"
 )
@@ -16,6 +19,12 @@ func databaseChangedSaveAlert(f *form, answer string) {
 	defer func() {
 		activeForm = nil
 	}()
+	// First we backup the database
+	if err := backupDatabase(); err != nil {
+		fmt.Println("Unable to backup database:")
+		fmt.Println(err.Error())
+		return
+	}
 	if strings.TrimSpace(answer) != "y" {
 		return
 	}
@@ -39,4 +48,21 @@ func saveDatabase() error {
 		return err
 	}
 	return openDatabaseFile(databaseLocation)
+}
+
+func backupDatabase() error {
+	src, err := os.Open(databaseLocation)
+	if err != nil {
+		return err
+	}
+	defer src.Close()
+	dir, file := filepath.Split(databaseLocation)
+	backupName := filepath.Join(dir, time.Now().Format("2006-01-02_15:04:05")+"_"+file)
+	dst, err := os.Create(backupName)
+	if err != nil {
+		return err
+	}
+	defer dst.Close()
+	_, err = io.Copy(dst, src)
+	return err
 }

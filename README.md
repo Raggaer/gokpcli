@@ -32,6 +32,8 @@ You can use the `help` command while a database is opened to view the list of co
 When an entry or a group is deleted we move it to the `Recycle Bin` group (this will be created if its missing).
 You can delete delete the entry forever or just leave it there as some sort of backup folder
 
+After deleting a backup of the database file is created (before the delete change) with the format `y-m-d_h:i:s_name.kdbx`
+
 ## Clipboard
 
 Commands like `xu` and `xp` copy the content to the system clipboard, making use of [https://github.com/atotto/clipboard](https://github.com/atotto/clipboard).
