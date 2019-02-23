@@ -20,7 +20,7 @@ func databaseChangedSaveAlert(f *form, answer string) {
 		activeForm = nil
 	}()
 	// First we backup the database
-	if doNotBackups {
+	if !doNotBackups {
 		if err := backupDatabase(); err != nil {
 			fmt.Println("Unable to backup database:")
 			fmt.Println(err.Error())
