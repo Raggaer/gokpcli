@@ -16,6 +16,17 @@ type command struct {
 
 var commands = []command{
 	{
+		Key: "backup",
+		Fn: func(args []string) {
+			if err := backupDatabase(); err != nil {
+				fmt.Println("Unable to backup database:")
+				fmt.Println(err.Error())
+			}
+		},
+		Help:      "Backups the database file. The new backup is saved as yyyy-mm-dd_hh:ii:ss_name.kdbx",
+		HelpSmall: "Backups the database file. The new backup is saved as yyyy-mm-dd_hh:ii:ss_name.kdbx",
+	},
+	{
 		Key: "save",
 		Fn: func(args []string) {
 			if err := saveDatabase(); err != nil {

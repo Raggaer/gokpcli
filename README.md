@@ -40,6 +40,7 @@ You can use the `help` command while a database is opened to view the list of co
 - `show` Shows an entry from the current working group
 - `search` Searches entries (by title) from the current working group
 - `save` Saves the database to disk
+- `backup` Backups the database file
 - `xx` Clears the clipboard
 
 ## Deleting groups and entries
