@@ -105,8 +105,8 @@ var commands = []command{
 				rm(args)
 			}
 		},
-		Help:      "Removes an entry of the current group (rm <entry path|number>)",
-		HelpSmall: "Removes an entry of the current group (rm <entry path|number>)",
+		Help:      "Removes an entry of the current group (rm <entry name|number>)",
+		HelpSmall: "Removes an entry of the current group (rm <entry name|number>)",
 	},
 	{
 		Key: "search",
@@ -125,8 +125,8 @@ var commands = []command{
 				rmdir(args)
 			}
 		},
-		Help:      "Deletes a group (rmdir <group_name|number>)",
-		HelpSmall: "Deletes a group (rmdir <group_name|number>)",
+		Help:      "Deletes a group (rmdir <group name|number>)",
+		HelpSmall: "Deletes a group (rmdir <group name|number>)",
 	},
 	{
 		Key: "edit",
