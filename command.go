@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"strings"
+
+	"github.com/atotto/clipboard"
 )
 
 type command struct {
@@ -138,6 +140,12 @@ var commands = []command{
 		Help:      "Modifies an entry (edit <path|number>)",
 		HelpSmall: "Modifies an entry (edit <path|number>)",
 	},
+	{
+		Key:       "xx",
+		Fn:        xx,
+		Help:      "Clears the clipboard",
+		HelpSmall: "Clears the clipboard",
+	},
 }
 
 func handleUserInput(input string) {
@@ -169,6 +177,11 @@ func handleUserInput(input string) {
 // Command "exit" closes the application
 func exit(args []string) {
 	close(quit)
+}
+
+// Command "xx" clears the clipboard
+func xx(args []string) {
+	clipboard.WriteAll("")
 }
 
 // Command "help" shows the list of commands
