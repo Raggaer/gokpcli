@@ -234,7 +234,7 @@ func createNewEntry(f *form, input string) {
 		fmt.Print("- Entry title: ")
 	case 2:
 		data.Title = input
-		fmt.Print("- Entry password: ")
+		fmt.Print("- Entry password (use 'gen', 'gen-simple', 'gen-complex' to generate passwords): ")
 	case 3:
 		// Here we can generate password
 		pw, err := generateEntryPassword(input)
@@ -268,6 +268,10 @@ func generateEntryPassword(input string) (string, error) {
 	// Simple password generation
 	case "gen":
 		return password.Generate(22, 4, 4, false, true)
+	case "gen-simple":
+		return password.Generate(22, 4, 0, false, true)
+	case "gen-complex":
+		return password.Generate(22, 5, 6, false, false)
 	default:
 		return input, nil
 	}
