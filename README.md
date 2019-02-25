@@ -55,6 +55,9 @@ After deleting a backup of the database file is created (before the delete chang
 Commands like `xu` and `xp` copy the content to the system clipboard, making use of [github.com/atotto/clipboard](https://github.com/atotto/clipboard).
 You will need `xclip` or `xsel` installed
 
+`xsel` is the better approach, since it does not save a list of clipboard contents (and the command `xx` just sets an empty string as the clipboard content) so using `xsel` is the
+more secure way of using the clipboard
+
 ## License
 
 **gokpcli** is licensed under the **GNU GPLv3**, basically you can do almost anything you want
