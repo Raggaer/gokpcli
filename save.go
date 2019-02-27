@@ -49,7 +49,8 @@ func saveDatabase() error {
 	if err := encoder.Encode(database); err != nil {
 		return err
 	}
-	return openDatabaseFile(databaseLocation)
+	database.UnlockProtectedEntries()
+	return nil
 }
 
 func backupDatabase() error {
@@ -59,7 +60,7 @@ func backupDatabase() error {
 	}
 	defer src.Close()
 	dir, file := filepath.Split(databaseLocation)
-	backupName := filepath.Join(dir, time.Now().Format("2006-01-02_15:04:05")+"_"+file)
+	backupName := filepath.Join(dir, time.Now().Format("2006-01-02_15-04-05")+"_"+file)
 	dst, err := os.Create(backupName)
 	if err != nil {
 		return err
