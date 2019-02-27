@@ -40,6 +40,7 @@ func databaseChangedSaveAlert(f *form, answer string) {
 
 func saveDatabase() error {
 	database.LockProtectedEntries()
+	defer database.UnlockProtectedEntries()
 	f, err := os.OpenFile(databaseLocation, os.O_WRONLY|os.O_TRUNC, 0777)
 	if err != nil {
 		return err
@@ -49,7 +50,6 @@ func saveDatabase() error {
 	if err := encoder.Encode(database); err != nil {
 		return err
 	}
-	database.UnlockProtectedEntries()
 	return nil
 }
 
