@@ -11,8 +11,6 @@ import (
 	"github.com/tobischo/gokeepasslib/v2"
 )
 
-var confirmDatabaseSave = false
-
 // Shows a database changed message with a save message
 func databaseChangedSaveAlert(f *form, answer string) {
 	// Remember to close the form
@@ -27,7 +25,7 @@ func databaseChangedSaveAlert(f *form, answer string) {
 			return
 		}
 	}
-	if strings.TrimSpace(answer) != "y" {
+	if strings.TrimSpace(answer) != "y" && strings.TrimSpace(answer) != "yes" {
 		return
 	}
 	if err := saveDatabase(); err != nil {

@@ -25,7 +25,6 @@ func mkdir(args []string) {
 
 // Command "rmdir" deletes a group from the current working group
 func rmdir(args []string) {
-	log.Println(args[0])
 	group := getGroupByNameOrId(args[0])
 	log.Println(group)
 	if group == nil || args[0] == recycleBinGroup {
