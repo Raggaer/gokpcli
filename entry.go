@@ -292,6 +292,7 @@ func xp(args []string) {
 	e.Times.UsageCount++
 	clipboard.WriteAll(e.GetPassword())
 	fmt.Printf("Copied entry '%s' password to clipboard\r\n", e.GetTitle())
+	go clipboardClear(clipboardClearDuration, e.GetPassword())
 }
 
 // Command "xw" copies an entry URL
@@ -309,6 +310,7 @@ func xw(args []string) {
 	e.Times.UsageCount++
 	clipboard.WriteAll(e.GetContent("URL"))
 	fmt.Printf("Copied entry '%s' URL to clipboard\r\n", e.GetTitle())
+	go clipboardClear(clipboardClearDuration, e.GetContent("URL"))
 }
 
 // Command "xu" copies an entry username
@@ -326,6 +328,7 @@ func xu(args []string) {
 	e.Times.UsageCount++
 	clipboard.WriteAll(e.GetContent("UserName"))
 	fmt.Printf("Copied entry '%s' username to clipboard\r\n", e.GetTitle())
+	go clipboardClear(clipboardClearDuration, e.GetContent("UserName"))
 }
 
 func mask(data, m string) string {

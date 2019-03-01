@@ -9,18 +9,21 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+	"time"
 
+	"github.com/atotto/clipboard"
 	"github.com/tobischo/gokeepasslib/v2"
 )
 
 var (
-	quit                 = make(chan struct{})
-	msg                  = make(chan string, 1)
-	waitCommandMessage   = ">> gokpcli "
-	databaseLocation     string
-	passwordFileLocation string
-	database             *gokeepasslib.Database
-	doNotBackups         = false
+	clipboardClearDuration = time.Second * 10
+	quit                   = make(chan struct{})
+	msg                    = make(chan string, 1)
+	waitCommandMessage     = ">> gokpcli "
+	databaseLocation       string
+	passwordFileLocation   string
+	database               *gokeepasslib.Database
+	doNotBackups           = false
 )
 
 func main() {
@@ -116,4 +119,16 @@ func buildApplicationWaitMessage() string {
 	str += " "
 	return str
 
+}
+
+// Clears the clipboard only if the content is equal to clipboard
+func clipboardClear(at time.Duration, content string) {
+	time.Sleep(at)
+	clip, err := clipboard.ReadAll()
+	if err != nil {
+		return
+	}
+	if clip == content {
+		clipboard.WriteAll("")
+	}
 }
