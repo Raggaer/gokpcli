@@ -5,6 +5,7 @@ Simple KeePass2 console client for linux using a simple command system
 
 This project is heavily inspired on [http://kpcli.sourceforge.net/](http://kpcli.sourceforge.net/), 
 my attempt is to recreate something similar using something more 'modern' than perl.
+
 However while **kpcli** takes over the terminal creating a new screen, my approach does not
 
 ## Usage
