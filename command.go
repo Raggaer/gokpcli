@@ -25,8 +25,8 @@ var commands = []command{
 				fmt.Println("Database backup created")
 			}
 		},
-		Help:      "Backups the database file. The new backup is saved as yyyy-mm-dd_hh:ii:ss_name.kdbx",
-		HelpSmall: "Backups the database file. The new backup is saved as yyyy-mm-dd_hh:ii:ss_name.kdbx",
+		Help:      "Backups the database file. The new backup is saved as yyyy-mm-dd_hh-ii-ss_name.kdbx",
+		HelpSmall: "Backups the database file. The new backup is saved as yyyy-mm-dd_hh-ii-ss_name.kdbx",
 	},
 	{
 		Key: "save",
