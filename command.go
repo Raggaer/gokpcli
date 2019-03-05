@@ -170,7 +170,7 @@ func handleUserInput(input string) {
 	// Check if any form is active
 	if activeForm != nil {
 		activeForm.Stage++
-		activeForm.Fn(activeForm, args[0])
+		activeForm.Fn(activeForm, input)
 		return
 	}
 
