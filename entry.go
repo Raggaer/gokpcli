@@ -129,6 +129,45 @@ func getEntryByNameOrId(entry string) *gokeepasslib.Entry {
 			return &e
 		}
 	}
+
+	return nil
+}
+
+func getEntryByPath(path string) *gokeepasslib.Entry {
+	// Try to retrieve entry by path
+	movedPaths := 0
+	paths := strings.Split(path, "/")
+pathRange:
+	for i, path := range paths {
+		// If its the entry from the path
+		if i == len(paths)-1 {
+			e := getEntryByNameOrId(path)
+			// Remove moved paths
+			groupHistory = groupHistory[0 : len(groupHistory)-movedPaths]
+			return e
+		}
+
+		// Move to next group
+		gid, err := strconv.Atoi(path)
+		if err != nil {
+			for x, g := range currentGroup().Groups {
+				if strings.ToLower(g.Name) == strings.ToLower(path) {
+					groupHistory = append(groupHistory, x)
+					continue pathRange
+				}
+			}
+		} else {
+			gid--
+			for x := range currentGroup().Groups {
+				if x == gid {
+					groupHistory = append(groupHistory, x)
+					movedPaths++
+					continue pathRange
+				}
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -181,7 +220,7 @@ func search(args []string) {
 
 // Command "show" shows information about an entry
 func show(args []string) {
-	entry := getEntryByNameOrId(args[0])
+	entry := getEntryByPath(args[0])
 	if entry == nil {
 		return
 	}
@@ -280,7 +319,7 @@ func generateEntryPassword(input string) (string, error) {
 // Command "xp" copies an entry password
 func xp(args []string) {
 	entry := args[0]
-	e := getEntryByNameOrId(entry)
+	e := getEntryByPath(entry)
 	if e == nil {
 		return
 	}
@@ -298,7 +337,7 @@ func xp(args []string) {
 // Command "xw" copies an entry URL
 func xw(args []string) {
 	entry := args[0]
-	e := getEntryByNameOrId(entry)
+	e := getEntryByPath(entry)
 	if e == nil {
 		return
 	}
@@ -316,7 +355,7 @@ func xw(args []string) {
 // Command "xu" copies an entry username
 func xu(args []string) {
 	entry := args[0]
-	e := getEntryByNameOrId(entry)
+	e := getEntryByPath(entry)
 	if e == nil {
 		return
 	}

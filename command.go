@@ -52,8 +52,8 @@ var commands = []command{
 				show(args)
 			}
 		},
-		Help:      "Shows an entry (show <entry name|number>)",
-		HelpSmall: "Shows an entry (show <entry name|number>)",
+		Help:      "Shows an entry (show <entry name|number|entry path>)",
+		HelpSmall: "Shows an entry (show <entry name|number|entry path>)",
 	},
 	{
 		Key: "xp",
@@ -62,8 +62,8 @@ var commands = []command{
 				xp(args)
 			}
 		},
-		Help:      "Copies an entry password (xp <entry name|number>)",
-		HelpSmall: "Copies an entry password (xp <entry name|number>)",
+		Help:      "Copies an entry password (xp <entry name|number|entry path>)",
+		HelpSmall: "Copies an entry password (xp <entry name|number|entry path>)",
 	},
 	{
 		Key: "xw",
@@ -72,8 +72,8 @@ var commands = []command{
 				xw(args)
 			}
 		},
-		Help:      "Copies an entry URL (xw <entry name|number>)",
-		HelpSmall: "Copies an entry URL (xw <entry name|number>)",
+		Help:      "Copies an entry URL (xw <entry name|number|entry path>)",
+		HelpSmall: "Copies an entry URL (xw <entry name|number|entry path>)",
 	},
 	{
 		Key: "xu",
@@ -82,8 +82,8 @@ var commands = []command{
 				xu(args)
 			}
 		},
-		Help:      "Copies an entry username (xu <entry name|number>)",
-		HelpSmall: "Copies an entry username (xu <entry name|number>)",
+		Help:      "Copies an entry username (xu <entry name|number|entry path>)",
+		HelpSmall: "Copies an entry username (xu <entry name|number|entry path>)",
 	},
 	{
 		Key:       "mkdir",
