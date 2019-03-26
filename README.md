@@ -44,6 +44,16 @@ You can use the `help` command while a database is opened to view the list of co
 - `backup` Backups the database file
 - `xx` Clears the clipboard
 
+### Shortcuts
+
+You can declare shortcuts inside `~/.config/gokpcli/config` with the following structure:
+
+`alias command input`
+
+For example, a shortcut called `g1` to retrieve a password from group `Email` and entry `Gmail` would like like this:
+
+`g1 xp Email/Gmail`
+
 ## Deleting groups and entries
 
 When an entry or a group is deleted we move it to the `Recycle Bin` group (this will be created if its missing).

@@ -7,6 +7,8 @@ import (
 	"io/ioutil"
 	"os"
 	"os/signal"
+	"os/user"
+	"strconv"
 	"strings"
 	"syscall"
 	"time"
@@ -40,7 +42,16 @@ func main() {
 		return
 	}
 
-	fmt.Println("gokpcli is ready for operation")
+	// Load command shortcuts
+	user, err := user.Current()
+	if err != nil {
+		fmt.Println("Unable to retrieve current user information")
+		fmt.Println(err.Error())
+		return
+	}
+	shortcuts = append(loadShortcuts(user.HomeDir + "/.config/gokpcli/config"))
+
+	fmt.Println("gokpcli is ready for operation. Loaded " + strconv.Itoa(len(shortcuts)) + " shortcuts")
 	fmt.Println("Type 'help' for a description of available commands")
 	fmt.Println("Type 'help <command>' for details on individual commands")
 	fmt.Print(waitCommandMessage)
