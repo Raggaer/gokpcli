@@ -229,5 +229,8 @@ func help(args []string) {
 		}
 		fmt.Println(command.Key + " -- " + command.HelpSmall)
 	}
-	fmt.Println("\r\nType \"help <command>\" for a more detailed help on a command")
+	fmt.Println("\r\nType \"help <command>\" for a more detailed help on a command\r\n")
+	for _, shortcut := range shortcuts {
+		fmt.Println("Shortcut '" + shortcut.Alias + "' -- " + shortcut.Command + " " + strings.Join(shortcut.Input, " "))
+	}
 }
