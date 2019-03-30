@@ -118,6 +118,44 @@ func createNewGroup(f *form, input string) {
 	}
 }
 
+func getGroupByPath(path string) *gokeepasslib.Group {
+	// Try to retrieve entry by path
+	movedPaths := 0
+	paths := strings.Split(path, "/")
+pathRange:
+	for i, path := range paths {
+		// If its the entry from the path
+		if i == len(paths)-1 {
+			e := currentGroup()
+			// Remove moved paths
+			groupHistory = groupHistory[0 : len(groupHistory)-movedPaths]
+			return e
+		}
+
+		// Move to next group
+		gid, err := strconv.Atoi(path)
+		if err != nil {
+			for x, g := range currentGroup().Groups {
+				if strings.ToLower(g.Name) == strings.ToLower(path) {
+					groupHistory = append(groupHistory, x)
+					continue pathRange
+				}
+			}
+		} else {
+			gid--
+			for x := range currentGroup().Groups {
+				if x == gid {
+					groupHistory = append(groupHistory, x)
+					movedPaths++
+					continue pathRange
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
 func currentGroup() *gokeepasslib.Group {
 	g := &database.Content.Root.Groups[0]
 	for _, h := range groupHistory {
