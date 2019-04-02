@@ -75,4 +75,8 @@ more secure way of using the clipboard
 with this project, except to distribute closed source versions
 
 This application is mainly using [github.com/tobischo/gokeepasslib](http://github.com/tobischo/gokeepasslib) package
-to modify the KeePass database
+to modify the KeePass database. Also the following libraries are used:
+
+- github.com/sethvargo/go-password
+- github.com/lithammer/fuzzysearch
+- github.com/atotto/clipboard
