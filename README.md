@@ -59,7 +59,7 @@ For example, a shortcut called `g1` to retrieve a password from group `Email` an
 When an entry or a group is deleted we move it to the `Recycle Bin` group (this will be created if its missing).
 You can delete delete the entry forever or just leave it there as some sort of backup folder
 
-After deleting a backup of the database file is created (before the delete change) with the format `y-m-d_h:i:s_name.kdbx`
+After deleting a backup of the database file is created (before the delete change) with the format `y-m-d_h-i-s_name.kdbx`
 
 ## Clipboard
 
