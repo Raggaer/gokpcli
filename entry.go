@@ -311,6 +311,8 @@ func generateEntryPassword(input string) (string, error) {
 		return password.Generate(22, 4, 0, false, true)
 	case "gen-complex":
 		return password.Generate(22, 5, 6, false, false)
+	case "gen-large":
+		return password.Generate(30, 7, 7, false, false)
 	default:
 		return input, nil
 	}
