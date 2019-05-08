@@ -320,7 +320,8 @@ func generateEntryPassword(input string) (string, error) {
 
 // Command "xp" copies an entry password
 func xp(args []string) {
-	entry := args[0]
+	// We combine args again to allow spaces
+	entry := strings.ToLower(strings.Join(args, " "))
 	e := getEntryByPath(entry)
 	if e == nil {
 		return
@@ -338,7 +339,8 @@ func xp(args []string) {
 
 // Command "xw" copies an entry URL
 func xw(args []string) {
-	entry := args[0]
+	// We combine args again to allow spaces
+	entry := strings.ToLower(strings.Join(args, " "))
 	e := getEntryByPath(entry)
 	if e == nil {
 		return
@@ -356,7 +358,8 @@ func xw(args []string) {
 
 // Command "xu" copies an entry username
 func xu(args []string) {
-	entry := args[0]
+	// We combine args again to allow spaces
+	entry := strings.ToLower(strings.Join(args, " "))
 	e := getEntryByPath(entry)
 	if e == nil {
 		return
